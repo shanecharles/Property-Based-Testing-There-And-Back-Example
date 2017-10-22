@@ -15,10 +15,10 @@ Target "BuildApp" (fun _ ->
 
 Target "Properties" (fun _ ->
   let (_, msgs) = executeFSI __SOURCE_DIRECTORY__ "properties.fsx" []
-  
-  msgs |> Seq.iter (function {Message=message} when message.Contains("Ok,") -> trace message
+  let passed = "Ok, passed"
+  msgs |> Seq.iter (function {Message=message} when message.Contains(passed) -> trace message
                            | {Message=message}               -> traceError message)
-  if msgs |> Seq.exists (fun {Message=msg} -> msg.Contains("Ok,") |> not) 
+  if msgs |> Seq.exists (fun {Message=msg} -> msg.Contains(passed) |> not) 
   then failwith "A property has failed"
 )
 
