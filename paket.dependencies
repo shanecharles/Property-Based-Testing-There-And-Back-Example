@@ -2,3 +2,4 @@ source https://nuget.org/api/v2
 content: none
 
 nuget FsCheck
+nuget Fake

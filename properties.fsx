@@ -1,7 +1,7 @@
 #I "packages/FsCheck/lib/net452/"
 #r "FsCheck.dll"
 
-#I "ThereAndBack/bin/debug/"
+#I "artifacts/"
 #r "ThereAndBack.dll"
 
 open FsCheck
@@ -20,5 +20,7 @@ let ``Check there and back for non empty string encryption`` (NonEmptyString inp
             |> encryption.EncryptStringToBytes_Aes 
             |> encryption.DecryptStringFromBytes_Aes)
 
-Check.Quick ``Check there and back of DateTime encryption``
-Check.Quick ``Check there and back for non empty string encryption``
+let config = Config.Quick
+
+Check.One("Check there and back of DateTime encryption", config, ``Check there and back of DateTime encryption``)
+Check.One("Check there and back for non empty string encryption",config,``Check there and back for non empty string encryption``)
